@@ -26,7 +26,7 @@ if os.path.exists(model_path):
 else:
     print("Training new model...")
     model = Sequential([
-        Input(shape = (rows_img * cols_imgs,)), # Input Layer
+        Input(shape = (rows_img * cols_imgs)), # Input Layer
         Dense(512, activation='relu'), # First Hidden Layer
         Dropout(0.5), # Half the neurons dropout for regularisation
         Dense(256, activation='relu'), # Second Hidden Layer
