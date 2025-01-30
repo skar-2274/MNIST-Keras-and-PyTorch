@@ -1,3 +1,4 @@
+import numpy as np
 import os
 from tensorflow import keras
 from keras.datasets import mnist
