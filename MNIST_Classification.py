@@ -1,6 +1,4 @@
-import numpy as np
 import os
-import matplotlib.pyplot as plt
 from tensorflow import keras
 from keras.datasets import mnist
 from keras.models import Sequential, load_model
