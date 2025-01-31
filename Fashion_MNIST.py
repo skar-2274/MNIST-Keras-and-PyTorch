@@ -5,6 +5,10 @@ from keras.datasets import fashion_mnist
 from keras.models import Sequential, load_model
 from keras.layers import Input, Dense, Dropout
 from keras.utils import to_categorical
+import time
+
+# Runtime
+start_time = time.time()
 
 # Load training and test data
 (img_train, lab_train), (img_test, lab_test) = fashion_mnist.load_data()
@@ -72,3 +76,9 @@ pred_i = pred.argmax(1)
 
 for i, pred_class in enumerate(pred_i):
     print(f"\nImage {i+1}: Predicted -> {class_labels[pred_class]}, Actual -> {class_labels[test_lab[i].argmax()]}")
+
+# Measure runtime
+end_time = time.time()
+total_time = end_time - start_time
+
+print(f"\nRuntime: {total_time:.2f} seconds")
