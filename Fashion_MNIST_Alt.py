@@ -65,7 +65,7 @@ def train_model(model, train_img, train_lab, model_path):
     print(f"Model saved to {model_path}")
 
 # Evaluate model
-def evaluate_model(model,test_img, test_lab):
+def evaluate_model(model, test_img, test_lab):
     eval = model.evaluate(test_img, test_lab)
     print(f"Test Loss: {eval[0]}")
     print(f"Test Accuracy: {eval[1]}")
@@ -92,7 +92,7 @@ def main():
         model = build_model(train_img.shape[1])
         train_model(model, train_img, train_lab, model_path)
 
-    evaluate_model(model,test_img, test_lab)
+    evaluate_model(model, test_img, test_lab)
     predition(model, test_img, test_lab)
 
 if __name__ == "__main__":
