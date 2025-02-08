@@ -31,7 +31,6 @@ test_data = datasets.FashionMNIST(
     download=True
 )
 
-# Prepare for training with DataLoader
 train_dataloader = DataLoader(training_data, batch_size=64, shuffle=True)
 test_dataloader = DataLoader(test_data, batch_size=64, shuffle=False)
 
@@ -39,21 +38,21 @@ test_dataloader = DataLoader(test_data, batch_size=64, shuffle=False)
 class MNISTModel(nn.Module):
     def __init__(self):
         super(MNISTModel, self).__init__()
-        self.conv1 = nn.Conv2d(in_channels=1, out_channels=32, kernel_size=3, stride=1, padding=1) # 32*28*28
-        self.conv2 = nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, stride=1, padding=1) # 64*28*28
-        self.pool = nn.MaxPool2d(kernel_size = 2, stride = 2) # Halves output to 64*14*14
+        self.conv1 = nn.Conv2d(in_channels=1, out_channels=32, kernel_size=3, stride=1, padding=1)
+        self.conv2 = nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, stride=1, padding=1)
+        self.pool = nn.MaxPool2d(kernel_size = 2, stride = 2)
 
-        self.fc1 = nn.Linear(64 * 14 * 14, 128) # 3D Tensor to 1D
+        self.fc1 = nn.Linear(64 * 14 * 14, 128)
         self.fc2 = nn.Linear(128, 10)
 
     def forward(self, x):
-        x = F.relu(self.conv1(x)) # Conv1 + ReLU
-        x = F.relu(self.conv2(x)) # Conv2 + ReLU
-        x = self.pool(x) # Max Pooling (Reduces Size)
+        x = F.relu(self.conv1(x))
+        x = F.relu(self.conv2(x))
+        x = self.pool(x)
 
-        x = torch.flatten(x, start_dim=1) # Flatten from 4D to 2D for FC layers
-        x = F.relu(self.fc1(x)) # First fully connected layer
-        x = self.fc2(x) # Final layer (no activation because CrossEntropyLoss applies softmax)
+        x = torch.flatten(x, start_dim=1)
+        x = F.relu(self.fc1(x))
+        x = self.fc2(x)
         return x
 
 # Check if model exists
