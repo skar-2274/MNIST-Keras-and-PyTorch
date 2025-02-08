@@ -58,7 +58,7 @@ def evaluate_model(model, test_img, test_lab):
     print(f"Test Accuracy: {eval[1]}")
 
 # Prediction
-def predition(model, test_img, test_lab, num_samples=10, N=20):
+def prediction(model, test_img, test_lab, num_samples=10, N=20):
     pred = model.predict(test_img[:N, :])
     pred_i = pred.argmax(1)
 
@@ -80,7 +80,7 @@ def main():
         train_model(model, train_img, train_lab, model_path)
 
     evaluate_model(model,test_img, test_lab)
-    predition(model, test_img, test_lab)
+    prediction(model, test_img, test_lab)
 
 if __name__ == "__main__":
     main()
