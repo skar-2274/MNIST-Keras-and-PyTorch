@@ -9,6 +9,7 @@ import time
 import os
 from tqdm import tqdm
 
+# Use GPU if available, otherwise use CPU
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
 
@@ -69,6 +70,8 @@ def train_model():
     num_epochs = 5
     for epoch in range(num_epochs):
         total_loss = 0.0
+        correct = 0
+        total = 0
 
         progress_bar = tqdm(train_dataloader, desc=f"Epoch {epoch+1}/{num_epochs}", leave=True)
 
@@ -81,9 +84,15 @@ def train_model():
             optimizer.step()
             total_loss += loss.item()
 
-            progress_bar.set_postfix(loss=loss.item())
+            _, predicted = torch.max(outputs, 1)
+            correct += (predicted == labels).sum().item()
+            total += labels.size(0)
 
-        print(f"Epoch {epoch+1}/5, Loss: {total_loss / len(train_dataloader):.4f}")
+            progress_bar.set_postfix(loss=loss.item(), accuracy=100 * correct / total)
+
+        epoch_loss = total_loss / len(train_dataloader)
+        epoch_accuracy = 100 * correct / total
+        print(f"Epoch {epoch+1}/{num_epochs}, Loss: {epoch_loss:.4f}, Accuracy: {epoch_accuracy:.2f}%")
 
     model.eval()
 
