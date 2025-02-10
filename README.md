@@ -1,6 +1,3 @@
-# Machine-Learning-Projects
-Machine learning projects for fun.
-
-This repository is for the MNIST and FashionMNIST projects.
+# MNIST and Fashion MNIST with Keras and PyTorch
 
 Libraries used include TensorFlow, Keras and PyTorch.
